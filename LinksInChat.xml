@@ -1,0 +1,374 @@
+﻿<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/..\..\FrameXML\UI.xsd">
+
+<!-- This is the hidden frame that launches the whole addon -->
+<Frame name="LinksInChatFrame" parent="UIParent" hidden="true">
+	<Scripts>
+		<OnLoad>self:RegisterEvent("PLAYER_ENTERING_WORLD");</OnLoad>
+		<OnEvent>LinksInChat:OnEvent(self, event, ...);</OnEvent>
+	</Scripts>
+</Frame>
+
+<!-- These are the custom font & button styles that we have defined -->
+<Font name="LinksInChatXML_Font_Title" inherits="GameFontNormalLarge" virtual="true"/>
+<Font name="LinksInChatXML_Font_Normal" inherits="SystemFont_Outline_Small" virtual="true"/>
+<Font name="LinksInChatXML_Font_Small" inherits="SystemFont_Outline_Small" virtual="true"/>
+
+<!-- This frame holds the Copy link Window -->
+<Frame name="LinksInChat_Copy_Frame" parent="UIParent" movable="false" resizable="false" enableKeyboard="true" enableMouseWheel="true" enableMouse="true" frameStrata="DIALOG" toplevel="true" hidden="true">
+	<!-- Size is adjusted by setting anchors relative to parent -->
+	<Size><AbsDimension x="500" y="80"/></Size>
+	<Anchors>
+		<Anchor point="CENTER" relativeTo="UIParent" relativePoint="CENTER"><Offset><AbsDimension x="0" y="0"/></Offset></Anchor>
+	</Anchors>
+
+	<!-- Titleregion is the area where the user can click and move the frame -->
+	<TitleRegion>
+		<Anchors>
+			<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT"><Offset><AbsDimension x="0" y="0"/></Offset></Anchor>
+			<Anchor point="BOTTOMRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT"><Offset><AbsDimension x="0" y="-17"/></Offset></Anchor>
+		</Anchors>
+	</TitleRegion>
+	<Scripts>
+		<OnKeyDown>if (key=="ESCAPE") then self:Hide(); end</OnKeyDown>
+		<OnLoad>
+		local L = LinksInChat_Locale;
+		LinksInChat_Copy_Frame_Title:SetText(L["CopyFrame Title"]);
+		LinksInChat_Copy_Frame_Info1:SetText(L["CopyFrame Info1"]);
+		LinksInChat_Copy_Frame_Info2:SetText(L["CopyFrame Info2"]);
+		</OnLoad>
+	</Scripts>
+
+	<!-- Border texture -->
+	<Backdrop bgFile="Interface\TutorialFrame\TutorialFrameBackground" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+		<EdgeSize><AbsValue val="16"/></EdgeSize>
+		<TileSize><AbsValue val="32"/></TileSize>
+		<BackgroundInsets><AbsInset left="5" right="5" top="5" bottom="5"/></BackgroundInsets>
+	</Backdrop>
+
+	<!-- The form title, info-text and background -->
+	<Layers>
+		<!-- FontStrings -->
+		<Layer level="ARTWORK">
+			<!-- At the top of the form -->
+			<FontString name="LinksInChat_Copy_Frame_Title" inherits="LinksInChatXML_Font_Title" text="Links in Chat">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT"><Offset><AbsDimension x="10" y="-15"/></Offset></Anchor>
+				</Anchors>
+			</FontString>
+
+			<FontString name="LinksInChat_Copy_Frame_Countdown" inherits="LinksInChatXML_Font_Small" text="8">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPRIGHT"><Offset><AbsDimension x="-24" y="-32"/></Offset></Anchor>
+				</Anchors>
+			</FontString>
+
+			<FontString name="LinksInChat_Copy_Frame_Info1" inherits="LinksInChatXML_Font_Small" text="Press Ctrl-C to copy the link.">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPRIGHT"><Offset><AbsDimension x="-265" y="-15"/></Offset></Anchor>
+				</Anchors>
+			</FontString>
+			<FontString name="LinksInChat_Copy_Frame_Info2" inherits="LinksInChatXML_Font_Small" text="Press ESC to close window.">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="LinksInChat_Copy_Frame_Info1" relativePoint="BOTTOMLEFT"><Offset><AbsDimension x="0" y="-4"/></Offset></Anchor>
+				</Anchors>
+			</FontString>
+		</Layer>
+
+		<!-- Background color -->
+		<Layer level="BACKGROUND">
+			<Texture>
+				<Color r="0" g="0.3" b="0" a="0.7"/> <!-- A dark-green color -->
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT"><Offset><AbsDimension x="2" y="-2"/></Offset></Anchor>
+					<Anchor point="BOTTOMRIGHT" relativeTo="$parent" relativePoint="BOTTOMRIGHT"><Offset><AbsDimension x="-2" y="2"/></Offset></Anchor>
+				</Anchors>
+			</Texture>
+		</Layer>
+	</Layers>
+
+	<Frames>
+		<!-- At the top of the form -->
+		<Button name="LinksInChat_Copy_Frame_CloseButton1" inherits="UIPanelCloseButton">
+			<Anchors>
+				<Anchor point="TOPRIGHT"><Offset><AbsDimension x="-3" y="-3" /></Offset></Anchor>
+			</Anchors>
+			<Scripts>
+				<OnClick>self:GetParent():Hide();</OnClick>
+			</Scripts>
+		</Button>
+
+		<!-- Edit box -->
+		<EditBox name="LinksInChat_Copy_Frame_EditBox" inherits="InputBoxTemplate" autoFocus="true">
+			<!-- Because of how Scrollframe works we need to set a .Width and .Height -->
+			<!-- This is dynamically adjusted in the <OnSizeChanged> event of the ScrollFrame -->
+			<Size><AbsDimension x="100" y="100"/></Size>
+			<Anchors>
+				<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT"><Offset><AbsDimension x="15" y="-10"/></Offset></Anchor>
+				<Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT"><Offset><AbsDimension x="-15" y="10"/></Offset></Anchor>
+			</Anchors>
+			<Scripts>
+				<OnEscapePressed>self:GetParent():Hide();</OnEscapePressed>
+				<OnShow>self:HighlightText();</OnShow>
+				<OnEditFocusGained>self:HighlightText();</OnEditFocusGained>
+			</Scripts>
+		</EditBox>
+	</Frames>
+</Frame>
+
+
+<!-- This frame holds the Addon options Window -->
+<Frame name="LinksInChatXML_Settings_Frame" parent="InterfaceOptionsFramePanelContainer">
+	<Scripts>
+		<OnLoad>
+		LinksInChat:SettingsFrame_OnLoad(self);
+
+		local L = LinksInChat_Locale;
+		LinksInChatXML_Settings_Frame_Title:SetText(L["Settings Title"]);
+		LinksInChatXML_Settings_Frame_Info1:SetText(L["Settings Info1"]);
+		LinksInChatXML_Settings_Frame_Info2:SetText(L["Settings Info2"]);
+		LinksInChatXML_Settings_Frame_Info3:SetText(L["Provider Info1"]);
+		LinksInChatXML_Settings_Frame_Translate:SetText(L["Translator info"]);
+
+		LinksInChatXML_Settings_Frame_Btn_Color:SetText(L["Button Web link color"]);
+		LinksInChatXML_Settings_Frame_DropDown_AutoHideLabel:SetText(L["Label Hide window after"]);
+		LinksInChatXML_Settings_Frame_Chk_IgnoreHyperLinksText:SetText(L["Check Ignore hyperlinks"]);
+		LinksInChatXML_Settings_Frame_Chk_ExtraText:SetText(L["Check Extra"]);
+		LinksInChatXML_Settings_Frame_Chk_SimpleText:SetText(L["Check Simple search"]);
+		LinksInChatXML_Settings_Frame_Chk_UseHTTPSText:SetText(L["Check Use HTTPS"]);
+		LinksInChatXML_Settings_Frame_Chk_AlwaysEnglishText:SetText(L["Check Always English"]);
+		LinksInChatXML_Settings_Frame_DropDown_ProviderLabel:SetText(L["Label Search provider"]);
+
+		LinksInChatXML_Settings_Frame_Info2:ClearAllPoints();
+		LinksInChatXML_Settings_Frame_Info2:SetPoint("BOTTOMLEFT", "LinksInChatXML_Settings_Frame_Chk_IgnoreHyperLinks", "TOPLEFT", 0, 10);
+		LinksInChatXML_Settings_Frame_Info2:SetPoint("BOTTOMRIGHT", "$parent", "BOTTOMRIGHT", -10, 0);
+
+		LinksInChatXML_Settings_Frame_Info3:ClearAllPoints();
+		LinksInChatXML_Settings_Frame_Info3:SetPoint("TOPLEFT", "LinksInChatXML_Settings_Frame_DropDown_Provider", "BOTTOMLEFT", 20, -10);
+		LinksInChatXML_Settings_Frame_Info3:SetPoint("TOPRIGHT", "$parent", "TOPRIGHT", -10, 0);
+		</OnLoad>
+	</Scripts>
+
+	<Layers>
+		<Layer level="ARTWORK">
+			<!-- At the top of the form -->
+			<FontString name="LinksInChatXML_Settings_Frame_Title" inherits="LinksInChatXML_Font_Title" text="Links in Chat: X.Y.Z">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT"><Offset><AbsDimension x="10" y="-20"/></Offset></Anchor>
+				</Anchors>
+			</FontString>
+
+			<FontString name="LinksInChatXML_Settings_Frame_Info1" inherits="LinksInChatXML_Font_Normal" justifyH="LEFT" wordwrap="true" maxLines="10" text="Clicking on web-links (http:// or www.) will open a window to copy the link to your clipboard.">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="LinksInChatXML_Settings_Frame_Title" relativePoint="BOTTOMLEFT"><Offset><AbsDimension x="10" y="-20"/></Offset></Anchor>
+					<Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT"><Offset><AbsDimension x="-10" y="0"/></Offset></Anchor>
+				</Anchors>
+			</FontString>
+
+			<!-- Below Autohide dropdown -->
+			<FontString name="LinksInChatXML_Settings_Frame_Info2" inherits="LinksInChatXML_Font_Normal" justifyH="LEFT" wordwrap="true" maxLines="10" text="You can also Alt-click hyperlinks (items, spells, etc) in chat to make web-links for them.">
+				<Anchors>
+					<!-- Anchors are done in OnLoad() do align it properly -->
+					<!--
+						<Anchor point="TOPLEFT" relativeTo="LinksInChatXML_Settings_Frame_Info1" relativePoint="BOTTOMLEFT"><Offset><AbsDimension x="0" y="-130"/></Offset></Anchor>
+						<Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT"><Offset><AbsDimension x="-10" y="0"/></Offset></Anchor>
+					-->
+				</Anchors>
+			</FontString>
+
+			<!-- Below Provider dropdown -->
+			<FontString name="LinksInChatXML_Settings_Frame_Info3" inherits="LinksInChatXML_Font_Small" justifyH="LEFT" wordwrap="true" maxLines="10" text="Not all search-providers can do advanced-search, and not all hyperlink-types are supported.">
+				<Anchors>
+					<!-- Anchors are done in OnLoad() do align it properly -->
+					<!--
+						<Anchor point="TOPLEFT" relativeTo="LinksInChatXML_Settings_Frame_Info2" relativePoint="BOTTOMLEFT"><Offset><AbsDimension x="10" y="-170"/></Offset></Anchor>
+						<Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT"><Offset><AbsDimension x="-10" y="0"/></Offset></Anchor>
+					-->
+				</Anchors>
+			</FontString>
+
+			<!-- Bottom -->
+			<FontString name="LinksInChatXML_Settings_Frame_Translate" inherits="LinksInChatXML_Font_Small" justifyH="LEFT" text="">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeTo="$parent" relativePoint="BOTTOMLEFT"><Offset><AbsDimension x="10" y="15"/></Offset></Anchor>
+				</Anchors>
+			</FontString>
+		</Layer>
+
+		<Layer level="BACKGROUND">
+			<!-- Texture used for Color picker -->
+			<Texture name="LinksInChatXML_Settings_Frame_Texture_Color">
+				<Color r="0" g="0" b="0" a="1"/>
+				<Size><AbsDimension x="17" y="17"/></Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT"><Offset><AbsDimension x="25" y="-150"/></Offset></Anchor>
+				</Anchors>
+			</Texture>
+		</Layer>
+	</Layers>
+
+	<Frames>
+		<Button name="LinksInChatXML_Settings_Frame_Btn_Color" inherits="UIPanelButtonTemplate" text="Web link color...">
+			<Size><AbsDimension x="130" y="25"/></Size>
+			<Anchors>
+				<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT"><Offset><AbsDimension x="47" y="-147"/></Offset></Anchor>
+			</Anchors>
+			<Scripts>
+				<OnShow>
+					local strColor = LinksInChat:GetCurrentSetting("Color");
+					local r,g,b = LinksInChat:HexColorToRGBPercent(strColor);
+					if (LinksInChatXML_Settings_Frame_Texture_Color["SetColorTexture"] ~= nil) then
+						LinksInChatXML_Settings_Frame_Texture_Color:SetColorTexture(r,g,b,1)
+					else
+						LinksInChatXML_Settings_Frame_Texture_Color:SetTexture(r,g,b,1)
+					end
+				</OnShow>
+				<OnClick>
+					LinksInChat:ShowColorPicker(LinksInChatXML_Settings_Frame_Texture_Color);
+				</OnClick>
+			</Scripts>
+		</Button>
+
+		<Frame name="LinksInChatXML_Settings_Frame_DropDown_AutoHide" inherits="UIDropDownNoTaintMenuTemplate" enableMouse="true">
+			<Anchors>
+				<Anchor point="TOPLEFT" relativeTo="LinksInChatXML_Settings_Frame_Btn_Color" relativePoint="TOPLEFT"><Offset><AbsDimension x="-40" y="-50"/></Offset></Anchor>
+			</Anchors>
+			<Layers>
+				<Layer level="BACKGROUND">
+					<FontString name="$parentLabel" inherits="GameFontHighlight" text="Hide window after">
+						<Anchors>
+							<Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT"><Offset><AbsDimension x="18" y="3"/></Offset></Anchor>
+						</Anchors>
+					</FontString>
+				</Layer>
+			</Layers>
+			<Scripts>
+				<OnLoad>
+					self.type = CONTROLTYPE_DROPDOWN;
+					self:RegisterEvent("PLAYER_ENTERING_WORLD");
+				</OnLoad>
+				<OnEvent>LinksInChat:Settings_Frame_DropDown_AutoHide_OnEvent(self, event, ...);</OnEvent>
+				<OnClick>self:SetValue(self.value);</OnClick>
+			</Scripts>
+		</Frame>
+
+		<CheckButton name="LinksInChatXML_Settings_Frame_Chk_IgnoreHyperLinks" inherits="ChatConfigCheckButtonTemplate">
+			<Anchors>
+				<Anchor point="TOPLEFT" relativeTo="LinksInChatXML_Settings_Frame_DropDown_AutoHide" relativePoint="TOPLEFT"><Offset><AbsDimension x="10" y="-90"/></Offset></Anchor>
+			</Anchors>
+			<Scripts>
+				<OnShow>if (LinksInChat:GetCurrentSetting("IgnoreHyperlinks") == true) then self:SetChecked(true); else self:SetChecked(false); end;</OnShow>
+				<OnClick>
+					local b = self:GetChecked();
+					self:SetChecked(b);
+					LinksInChat:SetCurrentSetting("IgnoreHyperlinks", b);
+				</OnClick>
+			</Scripts>
+		</CheckButton>
+
+		<CheckButton name="LinksInChatXML_Settings_Frame_Chk_Extra" inherits="ChatConfigCheckButtonTemplate">
+			<Anchors>
+				<Anchor point="TOPLEFT" relativeTo="LinksInChatXML_Settings_Frame_Chk_IgnoreHyperLinks" relativePoint="TOPLEFT"><Offset><AbsDimension x="0" y="-24"/></Offset></Anchor>
+			</Anchors>
+			<Scripts>
+				<OnShow>if (LinksInChat:GetCurrentSetting("Extra") == true) then self:SetChecked(true); else self:SetChecked(false); end;</OnShow>
+				<OnClick>
+					local b = self:GetChecked();
+					self:SetChecked(b);
+					LinksInChat:SetCurrentSetting("Extra", b);
+				</OnClick>
+			</Scripts>
+		</CheckButton>
+
+		<CheckButton name="LinksInChatXML_Settings_Frame_Chk_Simple" inherits="ChatConfigCheckButtonTemplate">
+			<Anchors>
+				<Anchor point="TOPLEFT" relativeTo="LinksInChatXML_Settings_Frame_Chk_Extra" relativePoint="TOPLEFT"><Offset><AbsDimension x="0" y="-24"/></Offset></Anchor>
+			</Anchors>
+			<Scripts>
+				<OnShow>if (LinksInChat:GetCurrentSetting("Simple") == true) then self:SetChecked(true); else self:SetChecked(false); end;</OnShow>
+				<OnClick>
+					local b = self:GetChecked();
+					self:SetChecked(b);
+					LinksInChat:SetCurrentSetting("Simple", b);
+				</OnClick>
+			</Scripts>
+		</CheckButton>
+
+		<CheckButton name="LinksInChatXML_Settings_Frame_Chk_UseHTTPS" inherits="ChatConfigCheckButtonTemplate">
+			<Anchors>
+				<Anchor point="TOPLEFT" relativeTo="LinksInChatXML_Settings_Frame_Chk_Simple" relativePoint="TOPLEFT"><Offset><AbsDimension x="0" y="-24"/></Offset></Anchor>
+			</Anchors>
+			<Scripts>
+				<OnShow>if (LinksInChat:GetCurrentSetting("UseHTTPS") == true) then self:SetChecked(true); else self:SetChecked(false); end;</OnShow>
+				<OnClick>
+					local b = self:GetChecked();
+					self:SetChecked(b);
+					LinksInChat:SetCurrentSetting("UseHTTPS", b);
+				</OnClick>
+			</Scripts>
+		</CheckButton>
+
+		<CheckButton name="LinksInChatXML_Settings_Frame_Chk_AlwaysEnglish" inherits="ChatConfigCheckButtonTemplate">
+			<Anchors>
+				<Anchor point="TOPLEFT" relativeTo="LinksInChatXML_Settings_Frame_Chk_UseHTTPS" relativePoint="TOPLEFT"><Offset><AbsDimension x="0" y="-24"/></Offset></Anchor>
+			</Anchors>
+			<Scripts>
+				<OnShow>if (LinksInChat:GetCurrentSetting("AlwaysEnglish") == true) then self:SetChecked(true); else self:SetChecked(false); end;</OnShow>
+				<OnClick>
+					local b = self:GetChecked();
+					self:SetChecked(b);
+					LinksInChat:SetCurrentSetting("AlwaysEnglish", b);
+					LinksInChat:UpdateProvider();
+				</OnClick>
+			</Scripts>
+		</CheckButton>
+
+		<Frame name="LinksInChatXML_Settings_Frame_DropDown_Provider" inherits="UIDropDownNoTaintMenuTemplate" enableMouse="true">
+			<Anchors>
+				<Anchor point="TOPLEFT" relativeTo="LinksInChatXML_Settings_Frame_Chk_AlwaysEnglish" relativePoint="TOPLEFT"><Offset><AbsDimension x="-9" y="-50"/></Offset></Anchor>
+			</Anchors>
+			<Layers>
+				<Layer level="BACKGROUND">
+					<FontString name="$parentLabel" inherits="GameFontHighlight" text="Search provider for hyperlinks">
+						<Anchors>
+							<Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT"><Offset><AbsDimension x="18" y="3"/></Offset></Anchor>
+						</Anchors>
+					</FontString>
+				</Layer>
+			</Layers>
+			<Scripts>
+				<OnLoad>
+					self.type = CONTROLTYPE_DROPDOWN;
+					self:RegisterEvent("PLAYER_ENTERING_WORLD");
+				</OnLoad>
+				<OnEvent>LinksInChat:Settings_Frame_DropDown_Provider_OnEvent(self, event, ...);</OnEvent>
+				<OnClick>self:SetValue(self.value);</OnClick>
+			</Scripts>
+		</Frame>
+		<!--
+		<Frame name="LinksInChatXML_Settings_Frame_DropDown_KeyModifier" inherits="UIDropDownNoTaintMenuTemplate" enableMouse="true">
+			<Anchors>
+				<Anchor point="TOPLEFT" relativeTo="LinksInChatXML_Settings_Frame_DropDown_Provider" relativePoint="TOPLEFT"><Offset><AbsDimension x="0" y="-85"/></Offset></Anchor>
+			</Anchors>
+			<Layers>
+				<Layer level="BACKGROUND">
+					<FontString name="$parentLabel" inherits="GameFontHighlight" text="Key modifier">
+						<Anchors>
+							<Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT"><Offset><AbsDimension x="18" y="3"/></Offset></Anchor>
+						</Anchors>
+					</FontString>
+				</Layer>
+			</Layers>
+			<Scripts>
+				<OnLoad>
+					self.type = CONTROLTYPE_DROPDOWN;
+					self:RegisterEvent("PLAYER_ENTERING_WORLD");
+				</OnLoad>
+				<OnEvent>LinksInChat:Settings_Frame_DropDown_KeyModifier_OnEvent(self, event, ...);</OnEvent>
+				<OnClick>self:SetValue(self.value);</OnClick>
+			</Scripts>
+		</Frame>
+		-->
+	</Frames>
+</Frame>
+
+</Ui>

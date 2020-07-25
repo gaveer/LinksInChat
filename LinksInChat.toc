@@ -1,0 +1,39 @@
+﻿## Interface: 80100
+## Version: 1.3.2
+## X-AddonType: FULL
+## Title: Links in Chat
+## Title-deDE: Links in Chat
+## Title-esES: Links in Chat
+## Title-esMX: Links in Chat
+## Title-frFR: Links in Chat
+## Title-itIT: Links in Chat
+## Title-koKR: Links in Chat
+## Title-ptBR: Links in Chat
+## Title-ruRU: Links in Chat
+## Title-zhCN: Links in Chat
+## Title-zhTW: Links in Chat
+## Notes: Shows a popup window when clicking web-links in chat.
+## Notes-deDE: Zeigt beim Klicken auf Chatlinks ein Pop-up-Fenster.
+## Notes-esES: Shows a popup window when clicking web-links in chat.
+## Notes-esMX: Muestra una ventana emergente al hacer click sobre un link en el chat.
+## Notes-frFR: Fais apparaitre une fenetre quand l'utilisateur clique sur un lien.
+## Notes-itIT: Mostra una finestra popup quando si clicca un collegamento nella chat.
+## Notes-koKR: Shows a popup window when clicking web-links in chat.
+## Notes-ptBR: Shows a popup window when clicking web-links in chat.
+## Notes-ruRU: Отображает всплывающее окно при нажатии на веб-ссылки в чате.
+## Notes-zhCN: 在聊天中点击网页连接时显示一个弹出窗口
+## Notes-zhTW: Shows a popup window when clicking web-links in chat.
+## Dependencies:
+## SavedVariables: LINKSINCHAT_settings
+## LoadOnDemand: 0
+## DefaultState: enabled
+
+UIDropDownNOTAINTMenu.xml
+
+Locale.lua
+SearchProvider.lua
+HiddenTooltip.lua
+
+LinkWebParsing.lua
+LinksInChat.lua
+LinksInChat.xml
