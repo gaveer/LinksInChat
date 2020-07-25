@@ -213,7 +213,7 @@
 					</EdgeSize>
 				</Backdrop>
 			</Frame>
-			<Frame name="$parentMenuBackdrop" setAllPoints="true">
+			<Frame name="$parentMenuBackdrop" setAllPoints="true" inherits="BackdropTemplate">
 				<Backdrop bgFile="Interface\Tooltips\UI-Tooltip-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
 					<EdgeSize>
 						<AbsValue val="16"/>
