@@ -1,0 +1,236 @@
+﻿Links in Chat - Changelog
+
+Version	1.3.2	(2017-09-09)		-Wow patch 7.3.0
+	General:
+		Updated .TOC for WOW patch 7.3.0
+	Bugfix:
+		Fixed PlaySound() error when changing settings (reported by transitbus).
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Version	1.3.1	(2017-06-04)		-Wow patch 7.2.0
+	Searchproviders:
+		Wowhead will now point to their Korean or Chinese version of the website when needed.
+		Battle.net search-providers have been removed as the sites no longer support searching for ingame items and even simple search provide no useful info.
+	Bugfix:
+		Addon-settings like the 'Alt-clicking in bank, etc' will now be properly applied after reload (reported by RavenDT).
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Version	1.3.0	(2017-03-31)		-Wow patch 7.2.0
+	General:
+		Updated .TOC for WOW patch 7.2.0
+		You can now Alt-click items under the new Sets tab in the Appearances collection (wardrobe).
+	Bugfix:
+		Alt-Clicking items in the Transmogrify UI and Appearances collection (wardrobe) will now work again.
+		Alt-Clicking on quests in the objectives tracker should now work better (world quests are still not consistent).
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Version	1.2.9	(2017-02-05)		-Wow patch 7.1.5
+	Bugfix:
+		Will no longer throw lua error when used with ElvUI due to missing eventhandler (reported by Ringeltangel).
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Version	1.2.8	(2017-01-23)		-Wow patch 7.1.5
+	General:
+		Added Spanish (Mexico) localization (by Lawghter).
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Version	1.2.7	(2017-01-16)		-Wow patch 7.1.5
+	General:
+		Added Russian localization (by dartraiden).
+	Bugfix:
+		Alt-clicking normal quests should work again.
+		Clicking world quests in the objectives tracker will now (sometimes) work.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Version	1.2.6	(2016-10-25)		-Wow patch 7.1.0
+	General:
+		Updated .TOC for WOW patch 7.1.0
+	Bugfix:
+		Alt-clicking shareable links for Twitter will no longer trigger the addon.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Version	1.2.5	(2016-09-08)		-Wow patch 7.0.3
+	Bugfix:
+		Alt-clicking Battle.net player names and Chat-channel names (Trade, LocalDefence, etc) in default chat will no longer trigger the addon.
+	Searchproviders:
+		Wowhead: Alt-clicking Order Hall Champion's should now point to the proper page.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Version	1.2.4	(2016-08-29)		-Wow patch 7.0.3
+	Bugfix:
+		Alt-clicking in collections (Mounts, Pets, Toys etc) should interact better with other addons loaded too.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Version	1.2.3	(2016-08-04)		-Wow patch 7.0.3
+	General:
+		You can now directly Alt-click lines in the reputation (factions) tab.
+		You can now directly Alt-click lines in the currency tab.
+		Added Chinese, Simplified localization (by aenerv7).
+		Reformatted settings page to work with chinese fonts sizes.
+	Searchproviders:
+		Added Baidu.com as search provider.
+		Wowhead and WowDB now supports faction lookup.
+		Buffed.de now support faction and currency lookup.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Version	1.2.2	(2016-07-30)		-Wow patch 7.0.3
+	General:
+		Addon should now work with the "Rematch" addon. Alt-clicking in the pet journal window should now work as with default UI.
+	Bugfix:
+		Will no longer throw LUA error when encountering an already url-encoded link (reported by soulwhip).
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Version	1.2.1	(2016-07-16)		-Wow patch 7.0.3
+	General:
+		Alt-clicking tradeskill recipes will now use the spellID instead of a simple search based on its name if possible.
+	Searchproviders:
+		Buffed.de and JudgeHype: Now support using NPC-id numbers
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Version	1.2.0	(2016-07-07)		-Wow patch 7.0.3
+	General:
+		Updated .TOC for WOW patch 7.0.3
+		Addon now supports the new Appearances tab (wardrobe).
+		You can now directly Alt-click items in the Talent and Honor Talent frame.
+		Addon now hooks into HandleModifiedItemClick. This reduces the amount of code needed.
+		Colorpicker in settings now works with Legion.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Version	1.1.9	(2016-03-26)		-Wow patch 6.2.4
+	General:
+		Addon should now work with the "Total RP 3" (TRP3) addon (reported by hadook13).
+		If TRP3 is enabled then LinksInchat will use an alternate method for handling web-links in the default chat-frames.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Version	1.1.8	(2016-01-27)		-Wow patch 6.2.3
+	General:
+		Addon will now highlight more strings that look like urls (server.domain.com:1234) (requested by pas06)
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Version	1.1.7	(2016-01-16)		-Wow patch 6.2.3
+	Bugfix:
+		Will no longer throw LUA error due to strange behavior from SpartanUI (reported by faceoh).
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Version	1.1.6	(2016-01-15)		-Wow patch 6.2.3
+	General:
+		Updated German localization (by pas06).
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Version	1.1.5	(2016-01-02)		-Wow patch 6.2.3
+	General:
+		IP addresses written in IPv4 format is now supported. I.e '127.0.0.1' and '127.0.0.1:8080' (requested by Bartoutofthebox).
+		IP addresses written in IPv6 format is now supported. I.e 'ABC:567:0:0:8888:9999:1111:0' and '[ABC:567::8888:9999:1111:0]:8080'.
+			Note that some short handed formatting of IPv6 addresses (like simply '::5' or '10:45:20::') is not enabled to prevent mismatches with emotes, timestamps, ascii-art etc.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Version	1.1.4	(2015-12-29)		-Wow patch 6.2.3
+	Bugfix:
+		Will no longer show a weblink when just the protocol name is typed (i.e 'www.' or 'http://' but nothing else).
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Version	1.1.3	(2015-07-16)		-Wow patch 6.2.0
+	General:
+		You can now directly Alt-click items in the quest-reward frame.
+		You can now directly Alt-click spells in the spellbook.
+		Addon should now work with the "ElvUI" addon.
+	Bugfix:
+		"/link" should no longer output links whith 'nil' in them.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Version	1.1.2	(2015-07-09)		-Wow patch 6.2.0
+	General:
+		Updated .TOC for WOW patch 6.2.0
+		You can now type "/link" in chat and get a link for your current target or mouseover npc/object/item.
+	Searchproviders:
+		Wowhead and WowDB: Advanced support for NPC hyperlinks added.
+		WowDB: Itemlinks with bonus-data now supported.
+		Itemlinks without bonus data will no longer show empty ?bonus= in their url.
+	Bugfix:
+		Links for items with bonus stats are working again.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Version	1.1.1	(2015-02-28)		-Wow patch 6.1.0
+	General:
+		You can now directly Alt-click items in the Heirlooms frame.
+		You can now directly Alt-click Pet abilities in the Pet Journal.
+		You can now directly Alt-click garrison missions and followers in the Garrison UI.
+		Addon should now work with the "Prat 3.0" addon.
+			If Prat is loaded then LinksInChat will disable its own URL-highlighting.
+			Prat will then handles the parsing of web-links (email, http://) so it will not support all the weblink types that LinksInChat does (battletag, etc).
+	Searchproviders:
+		Wowhead and WowDB: advanced support for Battlepet-abilities, Garrison missions, Follower-abilities and Follower hyperlinks added.
+	Bugfix:
+		Will no longer cause taint-error from the Blizzard_SocialUI.
+		Alt-clicking in Mountjournal, PetFrames and Toybox is working again.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Version	1.1.0	(2015-02-24)		-Wow patch 6.1.0
+	Bugfix:
+		Hyperlinks now are clickable again in the "WoW Instant Messenger" (WIM) addon's frames.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Version	1.0.9	(2015-02-23)		-Wow patch 6.1.0
+	Addon should now work with the "WoW Instant Messenger" (WIM) addon (reported by Managed).
+		ALT-clicking hyperlinks in WIM-frames will now work.
+		WIM handles the parsing of web-links (http:// www.) in its own frames so it will not support all the weblink types that LinksInChat does (email, battletag, teamspeak etc).
+		If WIM is enabled then LinksInchat will use an alternate method for handling web-links in the default chat-frames (i.e those frames not created by WIM).
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Version	1.0.8	(2015-02-22)		-Wow patch 6.1.0
+	Updated .TOC for WOW patch 6.1.0
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Version	1.0.7	(2015-02-17)		-Wow patch 6.0.3
+	Bugfix:
+		Alt-clicking questitems in the objectives tracker should no longer trigger taint-errors (reported by WarrTankFTW).
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Version	1.0.6	(2015-01-05)		-Wow patch 6.0.3
+	Bugfix:
+		Weakauras links should no longer fail (reported by dez101).
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Version	1.0.5	(2015-01-01)		-Wow patch 6.0.3
+	You can now directly Alt-click items in your grouplootframe (Need/Greed/Disenchant roll) and with NPC-Vendors.
+	You can now directly Alt-click reagents in the tradeskill frame (engineering, mining, enchanting, etc).
+	You can now directly Alt-click quest/achievements in the objectives tracker and questlog.
+	You can now directly Alt-click loot in the dungeon journal.
+	Bugfix:
+		Alt-Clicking should no longer conflict with other addons that hook into the Achievement UI.
+		Will no longer trigger lua-error when opening Black Market Auction House.
+		If the 'Auctioneer' addon is enabled then Alt-clicking in the Action House will not be enabled (reported by Visual).
+		Dropdown menus in the settings page now uses a local copy of UIDropDown to (hopefully) prevent taint-issues (reported by Visual).
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Version	1.0.4	(2014-11-18)		-Wow patch 6.0.3
+	You can now directly Alt-click items in your lootframe, bags, bank, guildbank and voidstorage.
+	Integrated support for the addon 'Bagnon'.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Version	1.0.3	(2014-11-11)		-Wow patch 6.0.3
+	You can now directly Alt-click items in your toybox, petjournal and mountjurnal.
+	Bugfix:
+		Spells will use the correct url when using Wowhead as the search provider.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Version	1.0.2	(2014-10-14)		-Wow patch 6.0.2
+	Added a proper German translation (by Tonyleila).
+	Added Startpage.com (ixquick) and DuckDuckGo.com as search providers.
+	Bugfix:
+		Fixed crash when creating simple-search uri's with punctuation chars in them (' " : etc)
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Version	1.0.1	(2014-10-05)		-Wow patch 6.0.2
+	Updated .TOC for WOW patch 6.0.2
+	Added support for itemlinks with bonus-data for search providers that support this (Wowhead only for now).
+	You can now directly Alt-click items in your character frame and when inspecting other players.
+	You can now directly Alt-click achievements in the achievement frame.
+	You can now directly Alt-click listings in the auction house and black market.
+	Bugfix:
+		Fixed error happening on lower end machines when resolving battlepet links
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Version	1.0.0	(2014-05-15)		-Wow patch 5.4.7
+	First version released
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

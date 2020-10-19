@@ -1754,7 +1754,7 @@ end
 function LinksInChat_TokenButton_OnClick(s,...)
 	--Hook is done in LinksInChat:CALLBACK_Blizzard_TokenUI()
 	--Source: AddOns\Blizzard_TokenUI\Blizzard_TokenUI.lua:TokenButton_OnClick()
-	local link = GetCurrencyListLink(s.index);
+	local link = C_CurrencyInfo.GetCurrencyListLink(s.index);
 	LinksInChat:CopyFrame_ExtraShow(link);
 
 	return hook_TokenButton_OnClick(s,...); --Call original function
