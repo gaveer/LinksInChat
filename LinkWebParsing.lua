@@ -177,7 +177,7 @@ function LinkWebParsing:getHyperLinkURI(link, text, tblProvider, booSimple, booU
 	end
 
 	--Special case: For currencies, 'text' is an empty string. We look up the name from the API
-	if (linkType == "currency") then text = tostring(GetCurrencyInfo(linkID)); end --There are more arguments returned from this function but they vary depending on the currency and they are not documented
+	if (linkType == "currency") then text = tostring(linkID); end --There are more arguments returned from this function but they vary depending on the currency and they are not documented
 
 	--For some hyperlinks 'text' will sometimes be an empty string and we will use tooltip scanning to get a name for it.
 	if (text == "") then

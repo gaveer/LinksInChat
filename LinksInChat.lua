@@ -1655,7 +1655,7 @@ function LinksInChat_WardrobeItemsModelMixin_OnMouseDown(self, button)
 	--Function WardrobeItemsModelMixin:OnMouseDown(button)
 	local link = nil;
 	local transmogType = self:GetParent().transmogType;
-	if (transmogType == LE_TRANSMOG_TYPE_ILLUSION) then
+	if (transmogType == LE_TRANSMOG_TYPE_ILLUSION and self.visualInfo.sourceID ~= nil) then
 		link = select(3, C_TransmogCollection.GetIllusionSourceInfo(self.visualInfo.sourceID));
 	else
 		local sources = WardrobeCollectionFrame_GetSortedAppearanceSources(self.visualInfo.visualID);

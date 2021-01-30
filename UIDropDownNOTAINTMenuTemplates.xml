@@ -201,30 +201,18 @@
 	<Button name="UIDropDownNoTaintListTemplate" hidden="true" frameStrata="DIALOG" enableMouse="true" virtual="true">
 		<Frames>
 			<Frame name="$parentBackdrop" setAllPoints="true">
-				<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background-Dark" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
-					<BackgroundInsets>
-						<AbsInset left="11" right="12" top="12" bottom="9"/>
-					</BackgroundInsets>
-					<TileSize>
-						<AbsValue val="32"/>
-					</TileSize>
-					<EdgeSize>
-						<AbsValue val="32"/>
-					</EdgeSize>
-				</Backdrop>
+    <KeyValues>
+        <KeyValue key="backdropInfo" value="BACKDROP_FRAME" type="global"/>
+        <KeyValue key="backdropBorderColor" value="LEGENDARY_ORANGE_COLOR" type="global"/>
+        <KeyValue key="backdropBorderColorAlpha" value="0.25" type="number"/>
+    </KeyValues>
 			</Frame>
 			<Frame name="$parentMenuBackdrop" setAllPoints="true" inherits="BackdropTemplate">
-				<Backdrop bgFile="Interface\Tooltips\UI-Tooltip-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
-					<EdgeSize>
-						<AbsValue val="16"/>
-					</EdgeSize>
-					<TileSize>
-						<AbsValue val="16"/>
-					</TileSize>
-					<BackgroundInsets>
-						<AbsInset left="5" right="5" top="5" bottom="4"/>
-					</BackgroundInsets>
-				</Backdrop>
+    <KeyValues>
+        <KeyValue key="backdropInfo" value="BACKDROP_FRAME" type="global"/>
+        <KeyValue key="backdropBorderColor" value="LEGENDARY_ORANGE_COLOR" type="global"/>
+        <KeyValue key="backdropBorderColorAlpha" value="0.25" type="number"/>
+    </KeyValues>
 				<Scripts>
 					<OnLoad inherit="prepend">
 						self:SetBackdropBorderColor(TOOLTIP_DEFAULT_COLOR.r, TOOLTIP_DEFAULT_COLOR.g, TOOLTIP_DEFAULT_COLOR.b);

@@ -38,13 +38,6 @@
 		</OnLoad>
 	</Scripts>
 
-	<!-- Border texture -->
-	<Backdrop bgFile="Interface\TutorialFrame\TutorialFrameBackground" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
-		<EdgeSize><AbsValue val="16"/></EdgeSize>
-		<TileSize><AbsValue val="32"/></TileSize>
-		<BackgroundInsets><AbsInset left="5" right="5" top="5" bottom="5"/></BackgroundInsets>
-	</Backdrop>
-
 	<!-- The form title, info-text and background -->
 	<Layers>
 		<!-- FontStrings -->
@@ -197,7 +190,7 @@
 		<Layer level="BACKGROUND">
 			<!-- Texture used for Color picker -->
 			<Texture name="LinksInChatXML_Settings_Frame_Texture_Color">
-				<Color r="0" g="0" b="0" a="1"/>
+				<Color r="5" g="5" b="5" a="1"/>
 				<Size><AbsDimension x="17" y="17"/></Size>
 				<Anchors>
 					<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT"><Offset><AbsDimension x="25" y="-150"/></Offset></Anchor>
@@ -359,7 +352,7 @@
 				</Layer>
 			</Layers>
 			<Scripts>
-				<OnLoad>
+				<OnLoad inherit="prepend">
 					self.type = CONTROLTYPE_DROPDOWN;
 					self:RegisterEvent("PLAYER_ENTERING_WORLD");
 				</OnLoad>
