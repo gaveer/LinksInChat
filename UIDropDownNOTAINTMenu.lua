@@ -479,7 +479,7 @@ function UIDropDownNoTaintMenu_AddButton(info, level)
 	-- If has a colorswatch, show it and vertex color it
 	local colorSwatch = _G[listFrameName.."Button"..index.."ColorSwatch"];
 	if ( info.hasColorSwatch ) then
-		_G["DropDownNoTaintList"..level.."Button"..index.."ColorSwatch".."NormalTexture"]:SetVertexColor(info.r, info.g, info.b);
+		_G["DropDownNoTaintList"..level.."Button"..index.."ColorSwatch".."NormalTexture"]:SetVertexColor(1, 1, 1);
 		button.r = info.r;
 		button.g = info.g;
 		button.b = info.b;
