@@ -14,23 +14,18 @@
 <Font name="LinksInChatXML_Font_Small" inherits="SystemFont_Outline_Small" virtual="true"/>
 
 <!-- This frame holds the Copy link Window -->
-<Frame name="LinksInChat_Copy_Frame" parent="UIParent" movable="false" resizable="false" enableKeyboard="true" enableMouseWheel="true" enableMouse="true" frameStrata="DIALOG" toplevel="true" hidden="true">
+<Frame name="LinksInChat_Copy_Frame" parent="UIParent" movable="false" resizable="false" enableKeyboard="true" enableMouse="true" frameStrata="DIALOG" toplevel="true" hidden="true">
 	<!-- Size is adjusted by setting anchors relative to parent -->
 	<Size><AbsDimension x="500" y="80"/></Size>
 	<Anchors>
 		<Anchor point="CENTER" relativeTo="UIParent" relativePoint="CENTER"><Offset><AbsDimension x="0" y="0"/></Offset></Anchor>
 	</Anchors>
 
-	<!-- Titleregion is the area where the user can click and move the frame -->
-	<TitleRegion>
-		<Anchors>
-			<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT"><Offset><AbsDimension x="0" y="0"/></Offset></Anchor>
-			<Anchor point="BOTTOMRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT"><Offset><AbsDimension x="0" y="-17"/></Offset></Anchor>
-		</Anchors>
-	</TitleRegion>
 	<Scripts>
 		<OnKeyDown>if (key=="ESCAPE") then self:Hide(); end</OnKeyDown>
 		<OnLoad>
+		self:EnableMouseWheel(true);
+		
 		local L = LinksInChat_Locale;
 		LinksInChat_Copy_Frame_Title:SetText(L["CopyFrame Title"]);
 		LinksInChat_Copy_Frame_Info1:SetText(L["CopyFrame Info1"]);
@@ -110,7 +105,7 @@
 
 
 <!-- This frame holds the Addon options Window -->
-<Frame name="LinksInChatXML_Settings_Frame" parent="InterfaceOptionsFramePanelContainer">
+<Frame name="LinksInChatXML_Settings_Frame">
 	<Scripts>
 		<OnLoad>
 		LinksInChat:SettingsFrame_OnLoad(self);
@@ -207,13 +202,7 @@
 			</Anchors>
 			<Scripts>
 				<OnShow>
-					local strColor = LinksInChat:GetCurrentSetting("Color");
-					local r,g,b = LinksInChat:HexColorToRGBPercent(strColor);
-					if (LinksInChatXML_Settings_Frame_Texture_Color["SetColorTexture"] ~= nil) then
-						LinksInChatXML_Settings_Frame_Texture_Color:SetColorTexture(r,g,b,1)
-					else
-						LinksInChatXML_Settings_Frame_Texture_Color:SetTexture(r,g,b,1)
-					end
+					LinksInChat:LinksInChatXML_Settings_Frame_Btn_Color_OnShow()
 				</OnShow>
 				<OnClick>
 					LinksInChat:ShowColorPicker(LinksInChatXML_Settings_Frame_Texture_Color);

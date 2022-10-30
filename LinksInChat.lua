@@ -822,7 +822,10 @@ function LinksInChat:SettingsFrame_OnLoad(panel)
 	-- Set the name of the Panel
 	panel.name = Locale["CopyFrame Title"];	--"LinksInChat";
 	panel.default	= function (self) end;	--So few settings that we simply ignore the reset button
-	InterfaceOptions_AddCategory(panel);	--Add the panel to the Interface Options
+	--Add the panel to the Interface Options
+	local category = Settings.RegisterCanvasLayoutCategory(panel, panel.name);
+	category.ID = "LinksInChat";
+	Settings.RegisterAddOnCategory(category);
 end
 
 
@@ -840,7 +843,15 @@ function LinksInChat:UpdateProvider()
 	return nil;
 end
 
-
+function LinksInChat:LinksInChatXML_Settings_Frame_Btn_Color_OnShow()
+	local strColor = self:GetCurrentSetting("Color", "string", "FF0080")
+	local r,g,b = self:HexColorToRGBPercent(strColor);
+	if (LinksInChatXML_Settings_Frame_Texture_Color["SetColorTexture"] ~= nil) then
+		LinksInChatXML_Settings_Frame_Texture_Color:SetColorTexture(r,g,b,1)
+	else
+		LinksInChatXML_Settings_Frame_Texture_Color:SetTexture(r,g,b,1)
+	end
+end
 --####################################################################################
 --####################################################################################
 --Settings frame - Color picker
@@ -898,7 +909,7 @@ function LinksInChat:RGBPercentToHex(r,g,b)
 end
 
 
---[[Returns r, g, b for a given hex colorstring
+--Returns r, g, b for a given hex colorstring
 function LinksInChat:HexColorToRGBPercent(strHexColor)
 	--Expects: RRGGBB  --Red, Green, Blue
 	if (strlen(strHexColor) ~= 6) then return nil end
@@ -908,7 +919,7 @@ function LinksInChat:HexColorToRGBPercent(strHexColor)
 	local r, g, b = (tonumber( strsub(strHexColor,1,2), 16) /255), (tonumber( strsub(strHexColor,3,4), 16) /255), (tonumber( strsub(strHexColor,5,6), 16) /255);
 	if (r==nil or g==nil or b==nil) then return nil end
 	return r, g, b;
-end]]--
+end
 
 
 --####################################################################################
